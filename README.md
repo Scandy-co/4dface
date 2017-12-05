@@ -20,6 +20,7 @@ This is a demo app showing face tracking and 3D Morphable Model fitting on live 
 1. Clone with submodules: `git clone --recursive git://github.com/patrikhuber/4dface.git`, or, if you've already cloned it, get the submodules with `git submodule update --init --recursive` inside the `4dface` directory.
 
 2. Make sure you've got boost (>=1.54.0 should do), OpenCV (>=2.4.8), Eigen (>=3.2.0) and a recent compiler (>=gcc-4.9, >=clang-3.6, >=VS2015) installed. For Ubuntu 14.04 and newer, this will do the trick:
+
     ```
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test
     sudo apt-get update
@@ -28,10 +29,17 @@ This is a demo app showing face tracking and 3D Morphable Model fitting on live 
     For Windows, get binaries for vc14-64bit (VS2015) from boost.org and opencv.org, and the Eigen headers.
 
 3. Build the app:
-    Run from _outside_ the source directory:
-    1. `mkdir build && cd build`
 
-    2. `cmake -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc-5 -DCMAKE_CXX_COMPILER=g++-5 -DOpenCV_haarcascades_DIR=/usr/share/opencv/haarcascades/ ../4dface/`
+    ```bash
+    mkdir build; cd build
+    # Change this to whereever your opencv is installed, this is for brew
+    export OPENCV_DIR=/usr/local/opt/opencv/
+    cmake \
+    	-DCMAKE_INSTALL_PREFIX=$PWD/install \
+    	-DCMAKE_BUILD_TYPE=Release \
+    	-DOpenCV_haarcascades_DIR=$OPENCV_DIR/share/OpenCV/haarcascades/ \
+    	..
+    ```
 
     On Windows, add `-G "Visual Studio 14 2015 Win64"`. Also, you will probably need to add `-C ../4dface/initial_cache.cmake` as first argument - copy the file from `initial_cache.cmake.template` and adjust the paths.
 
@@ -39,9 +47,14 @@ This is a demo app showing face tracking and 3D Morphable Model fitting on live 
 
 4. Type `make` or build in Visual Studio.
 
-4. Type `make install`, or run the INSTALL target in Visual Studio, to copy all required files into a `share/` directory next to the executable.
+5. Type `make install`, or run the INSTALL target in Visual Studio, to copy all required files into a `share/` directory next to the executable.
 
-Then just double-click the `4dface` app from the install-directory or run with `4dface -i videofile` to run on a video.
+Then just double-click the `4dface` app from the install-directory or run with `4dface -i videofile` to run on a video. Or:
+
+  ```bash
+  cd install/bin
+  ./4dface
+  ```
 
 ## Keyboard shortcuts
 
