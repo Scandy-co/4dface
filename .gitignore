@@ -1,2 +1,3 @@
 # Ignore the user-specific initial_cache file
 initial_cache.cmake
+build/
