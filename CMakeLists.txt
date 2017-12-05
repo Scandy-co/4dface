@@ -43,7 +43,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "${4dface_VERSION_PATCH}")
 include(CPack)
 
 # Find dependencies:
-find_package(OpenCV 2.4.3 REQUIRED core imgproc highgui objdetect) # in 3.0: require videoio? Plus the thing Michael fixed for eos?
+find_package(OpenCV 3.0 REQUIRED core imgproc highgui objdetect videoio imgcodecs)
 message(STATUS "OpenCV include dir found at ${OpenCV_INCLUDE_DIRS}")
 message(STATUS "OpenCV library dir found at ${OpenCV_LIB_DIR}")
 set_target_properties(${OpenCV_LIBS} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
